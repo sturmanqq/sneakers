@@ -1,0 +1,50 @@
+     
+        .added {
+            display: flex;
+            margin-top: 20px;
+            border: 1px solid rgb(173, 173, 173);
+            padding: 10px;
+            justify-content: space-between;
+            
+            &Delete {
+                cursor: pointer;
+            }
+
+            &Info {
+                padding-left: 10px;
+
+                &Name {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
+                &Price {
+                    padding-top: 8px;
+                    }
+                
+                &Quantity {
+                    margin-top: 25px;
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        cursor: pointer;
+                    }
+
+                    &Num {
+                        width: 30px;
+                        height: 30px;
+                        text-align: center;
+                        padding: 7px 0px;
+                        background-color: rgb(224, 224, 224);
+                        border-radius: 5px;
+                        margin: 0px 15px;
+                        border: none;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }  
+            }
+        }

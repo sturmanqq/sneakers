@@ -1,0 +1,24 @@
+.footer {
+    background-color: rgb(32, 97, 61);
+    display: flex;
+    justify-content:space-around;
+    padding: 25px 0px;
+    color: white;
+    font-size: 22px;
+    font-family: 'Roboro', sans-serif;
+    line-height: 30px;
+
+    &Ul {
+        max-width: 220px;
+
+        &Social {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        &Title {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.content {
+    padding-top: 20px;
+    min-width: 1000px;
+    justify-self: center;
+    font-family: 'Roboto';
+
+    &Pre {
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+
+        &Title{
+            display: flex;
+
+            &Name {
+                margin-right: 30px;
+            }
+        }
+    }
+
+    &Main {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 30px;
+    }
+}
