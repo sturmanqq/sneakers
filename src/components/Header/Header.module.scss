@@ -1,3 +1,9 @@
+@mixin cart-favorite {
+    background-size: contain;
+    align-self: center;
+    cursor: pointer;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -141,22 +147,33 @@
     &Purchases {
         display: flex;
         padding-right: 15px;
-        
-        &Cart {
-            width: 27px;
-            height: 27px;     
-        }
 
         &Favourites {
+            @include cart-favorite();
             width: 25px;
             height: 25px;
         }
 
-        &Cart, &Favourites {
-            background-size: contain;
-            align-self: center;
+        &Container {
+            display: flex;
             margin-right: 30px;
-            cursor: pointer;
+            border: 2px solid  rgb(107, 107, 107);
+            border-radius: 20px;
+            padding: 5px 20px;
+            height: 35px;
+            align-self: center;
+            &Cart {
+                width: 27px;
+                height: 27px;   
+                @include cart-favorite();  
+            }
+
+            &Amount {
+                align-self: center;
+                margin-left: 10px;
+                border-left: 2px solid rgb(107, 107, 107);
+                padding-left: 5px;
+            }
         }
     }
 }

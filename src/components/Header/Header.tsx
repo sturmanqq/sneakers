@@ -12,6 +12,7 @@ const Header: React.FC = () => {
     const itemsF = useAppSelector(state => state.favoriteReduce.list)
 
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
+    const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
 
     return (
         <div className={styles.header}>
@@ -58,7 +59,10 @@ const Header: React.FC = () => {
             </div>
             <input placeholder='Поиск...' type="text" className={styles.headerSearch} />
             <div className={styles.headerPurchases}>
-                <img onClick={() => setOpenCart(true)} src='/images/cart.png' className={styles.headerPurchasesCart}/>
+                <div className={styles.headerPurchasesContainer}>
+                    <img onClick={() => setOpenCart(true)} src='/images/cart.png' className={styles.headerPurchasesContainerCart}/>
+                    <div className={styles.headerPurchasesContainerAmount}>{amount}</div>
+                </div>
                 <img onClick={() => setOpenFavorite(true)} src='/images/heart.png' className={styles.headerPurchasesFavourites}/>
             </div>
         </div>
