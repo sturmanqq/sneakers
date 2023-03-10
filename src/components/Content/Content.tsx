@@ -1,9 +1,11 @@
 import { useAppDispatch, useAppSelector } from '../../hooks'
+import { useGetProductsQuery } from '../../redux/productsSlice'
 import styles from './Content.module.scss'
 import Products from './Products/Products'
 
 const Content: React.FC = () => {
-    const products = useAppSelector(state => state.productReducer.list)
+    // const products = useAppSelector(state => state.productReducer.list)
+    const {data = []} = useGetProductsQuery('');
 
     return (
         <div className={styles.content}>
@@ -16,7 +18,7 @@ const Content: React.FC = () => {
                 <div className={styles.contentPreFilter}>Фильтры</div>
             </div>
             <div className={styles.contentMain}>
-            {products.map((product) => <Products key={product.id}
+            {data.map((product) => <Products key={product.id}
                                                  img={product.img} 
                                                  title={product.title} 
                                                  id={product.id} 

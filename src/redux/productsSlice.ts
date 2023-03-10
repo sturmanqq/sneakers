@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 interface IProduct {
     id: string,
@@ -7,12 +7,12 @@ interface IProduct {
     price: number,
 }
 
-interface IProductList {
-    list: IProduct[],
-}
+// interface IProductList {
+//     list: IProduct[],
+// }
 
-const initialState: IProductList = {
-    list: [
+// const initialState: IProductList = {
+//     list: [
         // {id: '1', img: '/productsList/ocr1.jpg', title: 'Adistar ', price: 5300},
         // {id: '2', img: '/productsList/ocr2.jpg', title: 'Ultraboost ', price: 4800},
         // {id: '3', img: '/productsList/ocr3.jpg', title: 'NMD Shoes ', price: 5000},
@@ -25,16 +25,28 @@ const initialState: IProductList = {
         // {id: '10', img: '/productsList/ocr10.jpg', title: 'Sleeve Tee', price: 4500},
         // {id: '11', img: '/productsList/ocr11.jpg', title: 'Hoodie', price: 4500},
         // {id: '12', img: '/productsList/ocr12.jpg', title: 'Shorts', price: 4500},
-    ],
-}
+//     ],
+// }
 
-export const productsSlice = createSlice({
-    name: 'products',
-    initialState,
-    reducers : {
-    },
+// export const productsSlice = createSlice({
+//     name: 'products',
+//     initialState,
+//     reducers : {
+//     },
+// })
+
+// export const {} = productsSlice.actions
+
+// export default productsSlice.reducer
+
+export const productsApi = createApi({
+    reducerPath: 'productsApi',
+    baseQuery: fetchBaseQuery({baseUrl: "http://localhost:3001/"}),
+    endpoints: (builder) => ({
+        getProducts: builder.query<IProduct[], string>({
+            query: () => 'products'
+        })
+    })
 })
 
-export const {} = productsSlice.actions
-
-export default productsSlice.reducer
+export const {useGetProductsQuery} = productsApi;
