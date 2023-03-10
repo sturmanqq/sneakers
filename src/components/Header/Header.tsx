@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     const [openCart, setOpenCart] = useState(false);
 
     const itemsC = useAppSelector(state => state.cartReducer.list)
-    const itemsF = useAppSelector(state => state.favoriteReduce.list)
+    const itemsF = useAppSelector(state => state.favoriteReducer.list)
 
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
     const amount = itemsC.reduce((sum, item) => sum + item.count, 0)

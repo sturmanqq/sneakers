@@ -11,7 +11,7 @@ interface IProduct {
 }
 
 const Products: React.FC<IProduct> = ({id, img, title, price}) => {
-    const favorite = useAppSelector(state => state.favoriteReduce.list.find(item => item.id === id))
+    const favorite = useAppSelector(state => state.favoriteReducer.list.find(item => item.id === id))
 
     const dispatch = useAppDispatch();
 
