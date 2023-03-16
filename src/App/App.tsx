@@ -3,9 +3,8 @@ import Content from '../components/Content/Content';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 
-
 function App() {
-  return (
+  return ( 
     <div className={styles.app}> 
       <Header />
       <Content />
@@ -15,3 +14,7 @@ function App() {
 }
 
 export default App;
+function dispatch(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+

@@ -1,9 +1,17 @@
 import { useAppDispatch, useAppSelector } from '../../hooks'
+import { productsFetch } from '../../redux/productsSlice'
 import styles from './Content.module.scss'
 import Products from './Products/Products'
+import {useEffect} from 'react'
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list)
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(productsFetch())
+    },[])
 
     return (
         <div className={styles.content}>
