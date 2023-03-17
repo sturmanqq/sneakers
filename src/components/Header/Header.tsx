@@ -1,19 +1,31 @@
-import {useState } from 'react'
-import { useAppSelector } from '../../hooks'
+import {useState, ChangeEvent } from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { addSearchValue } from '../../redux/filter/filter'
 import Cart from './Cart/Cart'
 import Favorite from './Favorite/Favorite'
 import styles from './Header.module.scss'
+import {debounce} from 'debounce'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
     const [openCart, setOpenCart] = useState(false);
+    const [searchValue,setSearchValue ] = useState('');
+
+    const dispatch = useAppDispatch();
 
     const itemsC = useAppSelector(state => state.cartReducer.list)
     const itemsF = useAppSelector(state => state.favoriteReducer.list)
 
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
     const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
+    
+    
 
+    const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value);
+        dispatch(addSearchValue(e.target.value));  
+    }
+    
     return (
         <div className={styles.header}>
             {openFavorite && <div  className={styles.headerOverlay}>
@@ -57,7 +69,9 @@ const Header: React.FC = () => {
                 <img src='/images/footshop.jpg' className={styles.headerNameLogo}/>
                 <div className={styles.headerNameTitle}>SneakersShop</div>
             </div>
-            <input placeholder='Поиск...' type="text" className={styles.headerSearch} />
+
+            <input value={searchValue} onChange={handleSearchValue} placeholder='Поиск...' type="text" className={styles.headerSearch} />
+
             <div className={styles.headerPurchases}>
                 <div className={styles.headerPurchasesContainer}>
                     <img onClick={() => setOpenCart(true)} src='/images/cart.png' className={styles.headerPurchasesContainerCart}/>
@@ -70,3 +84,4 @@ const Header: React.FC = () => {
 }
 
 export default Header
+

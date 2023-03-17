@@ -1,14 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const productsFetch = createAsyncThunk<IProduct[]>(
+export const productsFetch = createAsyncThunk<IProduct[], IFilters>(
     'products/productsFetch', 
-    async () => {
-    const {data} = await axios.get<IProduct[]>('http://localhost:3001/products');
-
+    async (params) => {
+        const {searchValue} = params;
+        const {data} = await axios.get<IProduct[]>(`http://localhost:3001/products?q=${searchValue}`);
     return data;
 })
 
+interface IFilters {
+    searchValue: string,
+}
 interface IProduct {
     id: string,
     img: string,
