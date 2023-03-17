@@ -1,4 +1,4 @@
-import {useState, ChangeEvent } from 'react'
+import {useState, ChangeEvent, useCallback } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { addSearchValue } from '../../redux/filter/filter'
 import Cart from './Cart/Cart'
@@ -19,11 +19,16 @@ const Header: React.FC = () => {
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
     const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
     
-    
+    const updateSearchValue = useCallback(
+        debounce((str: string) => {
+          dispatch(addSearchValue(str));
+        }, 800),
+        [],
+      );
 
     const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
-        dispatch(addSearchValue(e.target.value));  
+        updateSearchValue(e.target.value);  
     }
     
     return (

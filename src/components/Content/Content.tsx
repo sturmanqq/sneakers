@@ -3,7 +3,6 @@ import { productsFetch } from '../../redux/productsSlice'
 import styles from './Content.module.scss'
 import Products from './Products/Products'
 import {useEffect} from 'react'
-import { debounce } from "debounce";
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list)
