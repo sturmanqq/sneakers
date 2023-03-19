@@ -4,13 +4,14 @@ import axios from 'axios'
 export const productsFetch = createAsyncThunk<IProduct[], IFilters>(
     'products/productsFetch', 
     async (params) => {
-        const {searchValue} = params;
-        const {data} = await axios.get<IProduct[]>(`http://localhost:3001/products?q=${searchValue}`);
-    return data;
+        const {searchValue, pageValue} = params;
+        const {data} = await axios.get<IProduct[]>(`http://localhost:3001/products?_page=${pageValue}&_limit=4&q=${searchValue}`);
+        return data;
 })
 
 interface IFilters {
     searchValue: string,
+    pageValue: number,
 }
 interface IProduct {
     id: string,
@@ -48,7 +49,7 @@ export const productsSlice = createSlice({
             state.list = action.payload;
             state.status = Status.SUCCES;
         });
-        builder.addCase(productsFetch.rejected, (state, action) => {
+        builder.addCase(productsFetch.rejected, (state) => {
             state.status = Status.ERROR;
         });
     }

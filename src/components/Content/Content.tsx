@@ -3,16 +3,22 @@ import { productsFetch } from '../../redux/productsSlice'
 import styles from './Content.module.scss'
 import Products from './Products/Products'
 import {useEffect} from 'react'
+import Pagination from './Pagination/Pagination'
+import { addPageValue } from '../../redux/filter/filter'
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list)
-    const {searchValue} = useAppSelector(state => state.filterReducer)
+    const {searchValue, pageValue} = useAppSelector(state => state.filterReducer)
 
     const dispatch = useAppDispatch();
     
     useEffect(() => {
-        dispatch(productsFetch({searchValue}))
-    },[searchValue]);
+        dispatch(productsFetch({searchValue, pageValue}))
+    },[searchValue, pageValue]);
+
+    const onChangePage = (page: number) => {
+        dispatch(addPageValue(page));
+      }; 
 
     return (
         <div className={styles.content}>
@@ -33,6 +39,7 @@ const Content: React.FC = () => {
                                                  />)
             }
             </div>
+            <Pagination currentPage={pageValue} onChangePage={onChangePage}/>
         </div>
     )
 }

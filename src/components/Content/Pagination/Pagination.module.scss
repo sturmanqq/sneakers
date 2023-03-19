@@ -1,0 +1,27 @@
+.root{
+    li {
+        display: inline-flex;
+
+        a {
+            font-size: 20px;
+            padding: 10px 15px;
+            font-weight: bold;
+
+            &:hover {
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+    }
+
+    :global {
+        .selected {
+          a {
+            background-color: #4CAF50;
+            color: #fff;
+          }
+        }
+      }
+}
