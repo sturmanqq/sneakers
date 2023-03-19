@@ -1,6 +1,3 @@
-import { useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { addPageValue } from "../../../redux/filter/filter"
 import styles from './Pagination.module.scss'
 import ReactPaginate from 'react-paginate';
 

@@ -4,31 +4,33 @@ import styles from './Content.module.scss'
 import Products from './Products/Products'
 import {useEffect} from 'react'
 import Pagination from './Pagination/Pagination'
-import { addPageValue } from '../../redux/filter/filter'
+import { addCategory, addPageValue } from '../../redux/filter/filter'
+import Categories from './Category/Categories'
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list)
-    const {searchValue, pageValue} = useAppSelector(state => state.filterReducer)
+    const {searchValue, pageValue, categoryValue} = useAppSelector(state => state.filterReducer)
 
     const dispatch = useAppDispatch();
+
+    const category = categoryValue > 0 ? `&category=${categoryValue}` : '';
     
     useEffect(() => {
-        dispatch(productsFetch({searchValue, pageValue}))
-    },[searchValue, pageValue]);
+        dispatch(productsFetch({searchValue, pageValue, category}))
+    },[searchValue, pageValue, category]);
 
     const onChangePage = (page: number) => {
         dispatch(addPageValue(page));
       }; 
 
+    const onChangeCategory = (index: number) => {
+        dispatch(addCategory(index))
+    }
+
     return (
         <div className={styles.content}>
             <div className={styles.contentPre}>
-                <div className={styles.contentPreTitle}>
-                    <div className={styles.contentPreTitleName}>Все товары</div>
-                    <div className={styles.contentPreTitleName}>Обувь</div>
-                    <div className={styles.contentPreTitleName}>Одежда</div>
-                </div>
-                <div className={styles.contentPreFilter}>Фильтры</div>
+                <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
             </div>
             <div className={styles.contentMain}>
             {products.map((product) => <Products key={product.id}
