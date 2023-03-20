@@ -13,7 +13,7 @@ const Categories: React.FC<ICategories> = ({categoryValue, onChangeCategory}) =>
         <div className={styles.category}>
             <ul>
                 {categories.map((category, index) => (
-                    <li onClick={() => onChangeCategory(index)} className={categoryValue === index ? styles.categoryNameActive : styles.categoryName}>{category}</li>
+                    <li key={index} onClick={() => onChangeCategory(index)} className={categoryValue === index ? styles.categoryNameActive : styles.categoryName}>{category}</li>
                 ))}
             </ul>
         </div>

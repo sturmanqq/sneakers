@@ -1,15 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface ISort {
+    title: string,
+    titleBd: string,
+    sort: string,
+}
 interface IFilter{
     searchValue: string,
     pageValue: number,
     categoryValue: number,
+    sortValue: ISort,
 }
 
 const initialState: IFilter = {
     searchValue: '',
     pageValue: 1,
     categoryValue: 0,
+    sortValue: {
+        title: '',
+        titleBd: '',
+        sort: '',
+    }
 }
 
 export const filterSlice = createSlice({
@@ -30,10 +41,17 @@ export const filterSlice = createSlice({
             if(state.categoryValue) {
                 state.pageValue = 1;
             }
+        },
+        addSort (state, action: PayloadAction<ISort>) {
+            state.sortValue = action.payload;
+
+            if(state.sortValue) {
+                state.pageValue = 1;
+            }
         }
     }
 });
 
-export const {addSearchValue, addPageValue, addCategory} = filterSlice.actions
+export const {addSearchValue, addPageValue, addCategory, addSort} = filterSlice.actions
 
 export default filterSlice.reducer

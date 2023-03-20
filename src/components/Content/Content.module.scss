@@ -4,6 +4,11 @@
     justify-self: center;
     font-family: 'Roboto';
 
+    &Filters {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &Main {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

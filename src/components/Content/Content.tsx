@@ -6,18 +6,21 @@ import {useEffect} from 'react'
 import Pagination from './Pagination/Pagination'
 import { addCategory, addPageValue } from '../../redux/filter/filter'
 import Categories from './Category/Categories'
+import Sort from './Sort/Sort'
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list)
-    const {searchValue, pageValue, categoryValue} = useAppSelector(state => state.filterReducer)
+    const {searchValue, pageValue, categoryValue, sortValue} = useAppSelector(state => state.filterReducer)
 
     const dispatch = useAppDispatch();
 
     const category = categoryValue > 0 ? `&category=${categoryValue}` : '';
+    const sortBy = sortValue.titleBd;
+    const order = sortValue.sort; 
     
     useEffect(() => {
-        dispatch(productsFetch({searchValue, pageValue, category}))
-    },[searchValue, pageValue, category]);
+        dispatch(productsFetch({searchValue, pageValue, category, sortBy, order}))
+    },[searchValue, pageValue, category, sortBy, order]);
 
     const onChangePage = (page: number) => {
         dispatch(addPageValue(page));
@@ -29,8 +32,9 @@ const Content: React.FC = () => {
 
     return (
         <div className={styles.content}>
-            <div className={styles.contentPre}>
+            <div className={styles.contentFilters}>
                 <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
+                <Sort/>
             </div>
             <div className={styles.contentMain}>
             {products.map((product) => <Products key={product.id}
