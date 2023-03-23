@@ -1,10 +1,11 @@
-import {useState, ChangeEvent, useCallback } from 'react'
+import {useState, ChangeEvent, useCallback, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { addSearchValue } from '../../redux/filter/filter'
 import Cart from './Cart/Cart'
 import Favorite from './Favorite/Favorite'
 import styles from './Header.module.scss'
 import {debounce} from 'debounce'
+import { favoriteFetch } from '../../redux/favoriteSlice'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
@@ -15,6 +16,7 @@ const Header: React.FC = () => {
 
     const itemsC = useAppSelector(state => state.cartReducer.list)
     const itemsF = useAppSelector(state => state.favoriteReducer.list)
+    const {favoriteList} = useAppSelector(state => state.refetchReducer)
 
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
     const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
@@ -30,7 +32,11 @@ const Header: React.FC = () => {
         setSearchValue(e.target.value);
         updateSearchValue(e.target.value);  
     }
-    
+
+    useEffect(() => {
+        dispatch(favoriteFetch())
+    }, [favoriteList])
+ 
     return (
         <div className={styles.header}>
             {openFavorite && <div  className={styles.headerOverlay}>

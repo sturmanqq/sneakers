@@ -48,7 +48,7 @@ export const filterSlice = createSlice({
             if(state.sortValue) {
                 state.pageValue = 1;
             }
-        }
+        },
     }
 });
 

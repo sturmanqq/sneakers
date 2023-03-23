@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks';
-import { removeFavorite } from '../../../redux/favoriteSlice';
+import { deleteFavoriteFetch } from '../../../redux/favoriteSlice';
+import { deleteFavoriteRefetch } from '../../../redux/refetch/refetch';
 import styles from './Favorite.module.scss'
 
 interface IFavorite {
@@ -12,6 +14,11 @@ interface IFavorite {
 const Favorite: React.FC<IFavorite> = ({id, img, title, price}) => {
     const dispatch = useAppDispatch();
 
+    const hadnleDeleteFavorite = () => {
+        dispatch(deleteFavoriteRefetch(id))
+        dispatch(deleteFavoriteFetch(id))
+    }
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.wrapperAdded}>
@@ -19,7 +26,7 @@ const Favorite: React.FC<IFavorite> = ({id, img, title, price}) => {
                 <div className={styles.wrapperAddedInfo}>
                     <div className={styles.wrapperAddedInfoName}>{title}</div>
                     <div className={styles.wrapperAddedInfoPrice}>{price} р.</div>
-                    <button onClick={() => dispatch(removeFavorite(id))} className={styles.wrapperAddedInfoDelete}>Убрать</button>
+                    <button onClick={hadnleDeleteFavorite} className={styles.wrapperAddedInfoDelete}>Убрать</button>
                  </div>
             </div>
         </div>

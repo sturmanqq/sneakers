@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { addProduct } from '../../../redux/cartSlice';
-import { addFavorite } from '../../../redux/favoriteSlice';
+import { addFavoriteFetch, deleteFavoriteFetch } from '../../../redux/favoriteSlice';
+import { addFavoriteRefetch } from '../../../redux/refetch/refetch';
 import styles from './Products.module.scss'
 
 interface IProduct {
@@ -15,13 +17,23 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
 
     const dispatch = useAppDispatch();
 
-    const handleAddFavorite = () => {
-        dispatch(addFavorite({id, img, title, price}))
-    }
+    // const handleAddFavorite = () => {
+    //     dispatch(addFavorite({id, img, title, price}))
+    // }
 
+    const handleFavorite = () => {
+        dispatch(addFavoriteRefetch({id, img, title, price}));
+        
+        if(favorite){
+            dispatch(deleteFavoriteFetch(id))
+        } else {
+            dispatch(addFavoriteFetch(({id, img, title, price})))
+        }     
+    }
+    
     return (
         <div className={styles.contentProducts}>
-            <img onClick={handleAddFavorite} className={styles.contentProductsFavorite} src={favorite ? '/images/heartclick.png' : "/images/heart.png"} alt="" />
+            <img onClick={handleFavorite} className={styles.contentProductsFavorite} src={favorite ? '/images/heartclick.png' : "/images/heart.png"} alt="" />
             <img className={styles.contentProductsImg} src={img} alt="" />
             <div className={styles.contentProductsOptions}>
                 <div>
