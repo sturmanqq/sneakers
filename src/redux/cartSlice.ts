@@ -1,5 +1,42 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
+export const cartFetch = createAsyncThunk<IPurchase[]>(
+    'cart/CartFetch',
+    async () => {
+        const { data } = await axios.get<IPurchase[]>('http://localhost:3001/cart');
+        return data;
+    }
+);
+
+export const addCartFetch = createAsyncThunk(
+    'addCart/addCartFetch',
+    async (params: IPurchase | number) => {
+        await axios.post(`http://localhost:3001/cart`, params)
+    }
+);
+
+export const deleteCartFetch = createAsyncThunk(
+    'deleteCart/deleteCartFetch',
+    async (id: string) => {
+        await axios.delete(`http://localhost:3001/cart/${id}`)
+    }
+)
+
+export const updateCartFetch = createAsyncThunk(
+    'upCart/upCartFetch',
+    async (params: IPurchase) => {
+        const {id, img, title, price, count} = params;
+        const newParams = {
+            id,
+            img,
+            title,
+            price,
+            count: count + 1,
+        };
+            await axios.put(`http://localhost:3001/cart/${id}`, newParams)
+    }
+);
 interface IPurchase {
     id: string,
     img: string,
@@ -9,7 +46,7 @@ interface IPurchase {
 }
 
 interface IPurchases {
-    list: IPurchase[]
+    list: IPurchase[],
 }
 const initialState: IPurchases = {
     list: [],
@@ -19,35 +56,18 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addProduct(state, action: PayloadAction<{id: string, img: string, title: string, price: number, count?: number}>) {
-            const idItem = state.list.find(item => item.id === action.payload.id )
+    },
+    extraReducers: (builder) => {
+        builder.addCase (cartFetch.pending, (state) => {
 
-            if(idItem){
-                idItem.count++;
-            } else {
-                state.list.push({...action.payload, count: 1});
-            }
-        },
-        removeProduct(state, action: PayloadAction<string>){
-            state.list = state.list.filter((item) => item.id !== action.payload)
-        },
-        plusProduct(state, action: PayloadAction<string>) {
-            const item = state.list.find(item => item.id === action.payload)
-
-            if(item) {
-                item.count++
-            }  
-        },
-        minusProduct(state, action: PayloadAction<string>) {
-            const item = state.list.find(item => item.id === action.payload)
-
-            if(item) {
-                item.count <= 1 ? state.list = state.list.filter((item) => item.id !== action.payload) : item.count--;
-            }          
-        }
+        });
+        builder.addCase (cartFetch.fulfilled, (state, action) => {
+            state.list = action.payload;
+        });
+        builder.addCase (cartFetch.rejected, (state) => {
+            
+        });
     }
 })
-
-export const {addProduct, removeProduct, plusProduct, minusProduct} = cartSlice.actions;
 
 export default cartSlice.reducer;

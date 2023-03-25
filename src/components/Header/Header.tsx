@@ -6,6 +6,7 @@ import Favorite from './Favorite/Favorite'
 import styles from './Header.module.scss'
 import {debounce} from 'debounce'
 import { favoriteFetch } from '../../redux/favoriteSlice'
+import { cartFetch } from '../../redux/cartSlice'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
 
     const itemsC = useAppSelector(state => state.cartReducer.list)
     const itemsF = useAppSelector(state => state.favoriteReducer.list)
-    const {favoriteList} = useAppSelector(state => state.refetchReducer)
+    const { favoriteList, cartList } = useAppSelector(state => state.refetchReducer)
 
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
     const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
@@ -37,6 +38,10 @@ const Header: React.FC = () => {
         dispatch(favoriteFetch())
     }, [favoriteList])
  
+    useEffect(() => {
+        dispatch(cartFetch())
+    }, [cartList])
+
     return (
         <div className={styles.header}>
             {openFavorite && <div  className={styles.headerOverlay}>

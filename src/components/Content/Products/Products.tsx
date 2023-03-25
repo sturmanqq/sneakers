@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { addProduct } from '../../../redux/cartSlice';
+import { addCartFetch, updateCartFetch } from '../../../redux/cartSlice';
 import { addFavoriteFetch, deleteFavoriteFetch } from '../../../redux/favoriteSlice';
-import { addFavoriteRefetch } from '../../../redux/refetch/refetch';
+import { addFavoriteRefetch, addCartRefetch } from '../../../redux/refetch/refetch';
 import styles from './Products.module.scss'
 
 interface IProduct {
@@ -13,7 +13,11 @@ interface IProduct {
 }
 
 const Products: React.FC<IProduct> = ({id, img, title, price}) => {
-    const favorite = useAppSelector(state => state.favoriteReducer.list.find(item => item.id === id))
+    
+    const favorite = useAppSelector(state => state.favoriteReducer.list.find(item => item.id === id));
+    const cart = useAppSelector(state => state.cartReducer.list.find(item => item.id === id));
+
+    const value = {id, img, title, price};
 
     const dispatch = useAppDispatch();
 
@@ -30,6 +34,17 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
             dispatch(addFavoriteFetch(({id, img, title, price})))
         }     
     }
+
+    const handleCart = () => {
+        dispatch(addCartRefetch({id, img, title, price}))
+
+        if(cart) {
+            dispatch(updateCartFetch(cart));    
+        } else {
+            dispatch(addCartFetch({...value, count: 1}));
+        }
+        
+    }
     
     return (
         <div className={styles.contentProducts}>
@@ -40,7 +55,7 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
                     <p>{title}</p>
                     <div>Цена: {price} р.</div>
                 </div>
-                <button onClick={() => dispatch(addProduct({id, img, title, price}))}>Добавить</button>  
+                <button onClick={handleCart}>Добавить</button>  
             </div>
             
         </div>

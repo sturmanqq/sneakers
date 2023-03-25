@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { minusProduct, plusProduct, removeProduct } from '../../../redux/cartSlice';
+import { useAppDispatch } from '../../../hooks'
+import { deleteCartFetch } from '../../../redux/cartSlice';
+import { minusCartRefetch, plusCartRefetch, deleteCartRefetch } from '../../../redux/refetch/refetch';
+
 import styles from './Cart.module.scss'
 
 interface ICart {
@@ -15,6 +16,11 @@ const Cart: React.FC<ICart> = ({id, img, title, price, count}) => {
 
     const dispatch = useAppDispatch();
 
+    const handleDeleteCart = () => {
+        dispatch(deleteCartRefetch(id));
+        dispatch(deleteCartFetch(id));
+    }
+
     return (
         <div className={styles.added}>
                     <img className={styles.addedImg} width={100} height={100} src={img} alt="" />
@@ -22,14 +28,14 @@ const Cart: React.FC<ICart> = ({id, img, title, price, count}) => {
                         <div className={styles.addedInfoName}>{title}</div>
                         <div className={styles.addedInfoPrice}>{price} р.</div>
                         <div className={styles.addedInfoQuantity}>
-                            <img onClick={() => dispatch(minusProduct(id))} src="/images/minus.png" alt="" />
+                            <img onClick={() => dispatch(minusCartRefetch(id))} src="/images/minus.png" alt="" />
                             <div className={styles.addedInfoQuantityNum}>{count}</div>
-                            <img onClick={() => dispatch(plusProduct(id))} src="/images/plus.png" alt="" />
+                            <img onClick={() => dispatch(plusCartRefetch(id))} src="/images/plus.png" alt="" />
                         </div>
                     </div>
-                    <div onClick={() => dispatch(removeProduct(id))} className={styles.addedDelete}>X</div>
+                    <div onClick={handleDeleteCart} className={styles.addedDelete}>X</div>
                 </div>  
     )
 }
 
-export default Cart
+export default Cart;
