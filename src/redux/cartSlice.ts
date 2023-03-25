@@ -24,7 +24,7 @@ export const deleteCartFetch = createAsyncThunk(
 )
 
 export const updateCartFetch = createAsyncThunk(
-    'upCart/upCartFetch',
+    'updateCart/updateCartFetch',
     async (params: IPurchase) => {
         const {id, img, title, price, count} = params;
         const newParams = {
@@ -37,6 +37,22 @@ export const updateCartFetch = createAsyncThunk(
             await axios.put(`http://localhost:3001/cart/${id}`, newParams)
     }
 );
+
+export const minusCartFetch = createAsyncThunk(
+    'minusCart/minusCartFetch',
+    async (params: IPurchase) => {
+        const {id, img, title, price, count} = params;
+        const newParams = {
+            id,
+            img,
+            title,
+            price,
+            count: count - 1,
+        };
+            await axios.put(`http://localhost:3001/cart/${id}`, newParams)
+    }
+);
+
 interface IPurchase {
     id: string,
     img: string,

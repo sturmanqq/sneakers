@@ -1,5 +1,5 @@
-import { useAppDispatch } from '../../../hooks'
-import { deleteCartFetch } from '../../../redux/cartSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { deleteCartFetch, minusCartFetch, updateCartFetch } from '../../../redux/cartSlice';
 import { minusCartRefetch, plusCartRefetch, deleteCartRefetch } from '../../../redux/refetch/refetch';
 
 import styles from './Cart.module.scss'
@@ -13,12 +13,28 @@ interface ICart {
 }
 
 const Cart: React.FC<ICart> = ({id, img, title, price, count}) => {
+    const cart = useAppSelector((state => state.cartReducer.list.find(item => item.id === id)))
 
     const dispatch = useAppDispatch();
 
     const handleDeleteCart = () => {
         dispatch(deleteCartRefetch(id));
         dispatch(deleteCartFetch(id));
+    }
+
+    const handleMinusCart = () => {
+        dispatch(minusCartRefetch(id));
+
+        if(cart && cart.count <= 1) {
+            dispatch(deleteCartFetch(id));
+        } else {
+            dispatch(minusCartFetch({id, img, title, price, count}));
+        }
+    };
+
+    const handlePlusCart = () => {
+        dispatch(plusCartRefetch(id));
+        dispatch(updateCartFetch({id, img, title, price, count}))
     }
 
     return (
@@ -28,9 +44,9 @@ const Cart: React.FC<ICart> = ({id, img, title, price, count}) => {
                         <div className={styles.addedInfoName}>{title}</div>
                         <div className={styles.addedInfoPrice}>{price} р.</div>
                         <div className={styles.addedInfoQuantity}>
-                            <img onClick={() => dispatch(minusCartRefetch(id))} src="/images/minus.png" alt="" />
+                            <img onClick={handleMinusCart} src="/images/minus.png" alt="" />
                             <div className={styles.addedInfoQuantityNum}>{count}</div>
-                            <img onClick={() => dispatch(plusCartRefetch(id))} src="/images/plus.png" alt="" />
+                            <img onClick={handlePlusCart} src="/images/plus.png" alt="" />
                         </div>
                     </div>
                     <div onClick={handleDeleteCart} className={styles.addedDelete}>X</div>

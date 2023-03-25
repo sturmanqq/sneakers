@@ -17,6 +17,7 @@ const Header: React.FC = () => {
 
     const itemsC = useAppSelector(state => state.cartReducer.list)
     const itemsF = useAppSelector(state => state.favoriteReducer.list)
+    
     const { favoriteList, cartList } = useAppSelector(state => state.refetchReducer)
 
     const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)

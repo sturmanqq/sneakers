@@ -17,7 +17,7 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
     const favorite = useAppSelector(state => state.favoriteReducer.list.find(item => item.id === id));
     const cart = useAppSelector(state => state.cartReducer.list.find(item => item.id === id));
 
-    const value = {id, img, title, price};
+    const props = {id, img, title, price};
 
     const dispatch = useAppDispatch();
 
@@ -41,7 +41,7 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
         if(cart) {
             dispatch(updateCartFetch(cart));    
         } else {
-            dispatch(addCartFetch({...value, count: 1}));
+            dispatch(addCartFetch({...props, count: 1}));
         }
         
     }
