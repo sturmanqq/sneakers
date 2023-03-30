@@ -1,12 +1,12 @@
 import {useState, ChangeEvent, useCallback, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { addSearchValue } from '../../redux/filter/filter'
-import Cart from './Cart/Cart'
-import Favorite from './Favorite/Favorite'
 import styles from './Header.module.scss'
 import {debounce} from 'debounce'
 import { favoriteFetch } from '../../redux/favoriteSlice'
 import { cartFetch } from '../../redux/cartSlice'
+import Favorite from './Favorite/Favorite'
+import Cart from './Cart/Cart'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
@@ -16,11 +16,9 @@ const Header: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const itemsC = useAppSelector(state => state.cartReducer.list)
-    const itemsF = useAppSelector(state => state.favoriteReducer.list)
     
     const { favoriteList, cartList } = useAppSelector(state => state.refetchReducer)
 
-    const result = itemsC.reduce((sum, item) => sum + (item.price * item.count), 0)
     const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
     
     const updateSearchValue = useCallback(
@@ -45,42 +43,12 @@ const Header: React.FC = () => {
 
     return (
         <div className={styles.header}>
-            {openFavorite && <div  className={styles.headerOverlay}>
-                                <div className={styles.headerOverlayFavorite}>
-                                    <div className={styles.headerOverlayFavoriteHead}>
-                                        <div className={styles.headerOverlayFavoriteHeadTitle}>Избранное</div>
-                                        <div onClick={() => setOpenFavorite(false)} className={styles.headerOverlayFavoriteHeadClose}>X</div>
-                                    </div>
-                                    <div className={styles.headerOverlayFavoriteTd}>
-                                    {itemsF.length <= 0 
-                                        ? <div className={styles.headerOverlayFavoriteTdEmpty}>
-                                            Нет избранных товаров
-                                        </div>
-                                        : itemsF.map(item => <Favorite key={item.id} id={item.id} img={item.img} title={item.title} price={item.price}/>)}
-                                    </div> 
-                                </div>
-                            </div>}
 
-            {openCart && <div className={styles.headerOverlay}>
-                            <div className={styles.headerOverlayCart}>
-                                <div className={styles.headerOverlayCartHead}>
-                                    <div className={styles.headerOverlayCartHeadTitle}>Корзина</div>
-                                    <div onClick={() => setOpenCart(false)} className={styles.headerOverlayCartHeadClose}>X</div>
-                                </div>
-                                <div className={styles.headerOverlayCartOverflow}>
-                                {itemsC.length <= 0 
-                                    ?<div className={styles.headerOverlayCartOverflowEmpty}>
-                                        <div>Корзина пуста...</div>
-                                    </div> 
-                                    : itemsC.map(item => <Cart key={item.id} id={item.id} img={item.img} title={item.title} price={item.price} count={item.count}/>)}
-                                </div>        
-                                <div className={styles.headerOverlayCartBuy}>
-                                    <div className={styles.headerOverlayCartBuyCort}>Общая цена: {result} р.</div>
-                                    <button className={styles.haedreOverlayCartBuyOrder}>Оформить</button>
-                                </div>
-                            </div>
-                         </div>
-            }
+            {(openCart || openFavorite) && <div  className={styles.headerOverlay}>     
+                            </div>}
+                            
+            <Favorite openFavorite={openFavorite} setOpenFavorite={setOpenFavorite}/>
+            <Cart openCart={openCart} setOpenCart={setOpenCart}/>
 
             <div className={styles.headerName}>
                 <img src='/images/footshop.jpg' className={styles.headerNameLogo}/>

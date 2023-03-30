@@ -1,56 +1,36 @@
-import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { deleteCartFetch, minusCartFetch, updateCartFetch } from '../../../redux/cartSlice';
-import { minusCartRefetch, plusCartRefetch, deleteCartRefetch } from '../../../redux/refetch/refetch';
-
+import { useAppSelector } from '../../../hooks';
 import styles from './Cart.module.scss'
+import CartProduct from './CartProduct/CartProduct';
 
 interface ICart {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-    count: number,
+    openCart: boolean,
+    setOpenCart: (value: boolean) => void,
 }
 
-const Cart: React.FC<ICart> = ({id, img, title, price, count}) => {
-    const cart = useAppSelector((state => state.cartReducer.list.find(item => item.id === id)))
+const Cart: React.FC<ICart> = ({openCart, setOpenCart}) => {
 
-    const dispatch = useAppDispatch();
+    const cartItems = useAppSelector(state => state.cartReducer.list)
 
-    const handleDeleteCart = () => {
-        dispatch(deleteCartRefetch(id));
-        dispatch(deleteCartFetch(id));
-    }
-
-    const handleMinusCart = () => {
-        dispatch(minusCartRefetch(id));
-
-        if(cart && cart.count <= 1) {
-            dispatch(deleteCartFetch(id));
-        } else {
-            dispatch(minusCartFetch({id, img, title, price, count}));
-        }
-    };
-
-    const handlePlusCart = () => {
-        dispatch(plusCartRefetch(id));
-        dispatch(updateCartFetch({id, img, title, price, count}))
-    }
+    const result = cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)
 
     return (
-        <div className={styles.added}>
-                    <img className={styles.addedImg} width={100} height={100} src={img} alt="" />
-                    <div className={styles.addedInfo}>
-                        <div className={styles.addedInfoName}>{title}</div>
-                        <div className={styles.addedInfoPrice}>{price} р.</div>
-                        <div className={styles.addedInfoQuantity}>
-                            <img onClick={handleMinusCart} src="/images/minus.png" alt="" />
-                            <div className={styles.addedInfoQuantityNum}>{count}</div>
-                            <img onClick={handlePlusCart} src="/images/plus.png" alt="" />
-                        </div>
-                    </div>
-                    <div onClick={handleDeleteCart} className={styles.addedDelete}>X</div>
-                </div>  
+        <div className={`${styles.cart} ${openCart ? styles.active : ''}`}>
+                                <div className={styles.cartHead}>
+                                    <div className={styles.cartHeadTitle}>Корзина</div>
+                                    <div onClick={() => setOpenCart(false)} className={styles.cartHeadClose}>X</div>
+                                </div>
+                                <div className={styles.cartOverflow}>
+                                {cartItems.length <= 0 
+                                    ?<div className={styles.cartOverflowEmpty}>
+                                        <div>Корзина пуста...</div>
+                                    </div> 
+                                    : cartItems.map(item => <CartProduct key={item.id} id={item.id} img={item.img} title={item.title} price={item.price} count={item.count}/>)}
+                                </div>        
+                                <div className={styles.cartBuy}>
+                                    <div className={styles.cartBuyCort}>Общая цена: {result} р.</div>
+                                    <button className={styles.haedreOverlayCartBuyOrder}>Оформить</button>
+                                </div>
+                            </div>
     )
 }
 

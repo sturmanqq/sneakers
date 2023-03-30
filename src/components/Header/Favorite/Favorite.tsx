@@ -1,36 +1,31 @@
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../../hooks';
-import { deleteFavoriteFetch } from '../../../redux/favoriteSlice';
-import { deleteFavoriteRefetch } from '../../../redux/refetch/refetch';
-import styles from './Favorite.module.scss'
+import FavoriteProduct from "./FavoriteProduct/FavoriteProduct";
+import styles from './Favorite.module.scss';
+import { useAppSelector } from "../../../hooks";
 
 interface IFavorite {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
+    openFavorite: boolean,
+    setOpenFavorite: (value: boolean) => void;
 }
 
-const Favorite: React.FC<IFavorite> = ({id, img, title, price}) => {
-    const dispatch = useAppDispatch();
+const Favorite: React.FC<IFavorite> = ({openFavorite, setOpenFavorite}) => {
 
-    const hadnleDeleteFavorite = () => {
-        dispatch(deleteFavoriteRefetch(id))
-        dispatch(deleteFavoriteFetch(id))
-    }
+    const favoriteItems = useAppSelector(state => state.favoriteReducer.list)
 
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.wrapperAdded}>
-                <img  className={styles.wrapperAddedImg} width={100} height={100} src={img} alt="" />
-                <div className={styles.wrapperAddedInfo}>
-                    <div className={styles.wrapperAddedInfoName}>{title}</div>
-                    <div className={styles.wrapperAddedInfoPrice}>{price} р.</div>
-                    <button onClick={hadnleDeleteFavorite} className={styles.wrapperAddedInfoDelete}>Убрать</button>
-                 </div>
-            </div>
-        </div>
+        <div className={`${styles.favorite} ${openFavorite ? styles.active : ''}`}>
+                                    <div className={styles.favoriteHead}>
+                                        <div className={styles.favoriteHeadTitle}>Избранное</div>
+                                        <div onClick={() => setOpenFavorite(false)} className={styles.favoriteHeadClose}>X</div>
+                                    </div>
+                                    <div className={styles.favoriteTd}>
+                                    {favoriteItems.length <= 0 
+                                        ? <div className={styles.favoriteTdEmpty}>
+                                            Нет избранных товаров
+                                        </div>
+                                        : favoriteItems.map(item => <FavoriteProduct key={item.id} id={item.id} img={item.img} title={item.title} price={item.price}/>)}
+                                    </div> 
+                                </div>
     )
-}
+};
 
 export default Favorite;

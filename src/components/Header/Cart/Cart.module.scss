@@ -1,50 +1,61 @@
-     
-        .added {
+.cart {
+    position: fixed;
+    width: 400px;
+    height: 100%;
+    background: white;
+    top: 0;
+    right: 0;
+    padding: 25px;
+    display: grid;
+    grid-template-rows: 0.5fr 12fr 1fr;
+    z-index: 2;
+    transform: translateX(100%);
+    transition: 0.6s;
+
+    &Overflow {
+        margin: 5px 0px 25px;
+        overflow: auto;
+
+        &Empty {
+            height: 100%;
             display: flex;
-            margin-top: 20px;
-            border: 1px solid rgb(173, 173, 173);
-            padding: 10px;
-            justify-content: space-between;
-            
-            &Delete {
-                cursor: pointer;
-            }
-
-            &Info {
-                padding-left: 10px;
-
-                &Name {
-                    font-size: 20px;
-                    font-weight: bold;
-                }
-
-                &Price {
-                    padding-top: 8px;
-                    }
-                
-                &Quantity {
-                    margin-top: 25px;
-                    display: flex;
-                    align-items: center;
-
-                    img {
-                        cursor: pointer;
-                    }
-
-                    &Num {
-                        width: 30px;
-                        height: 30px;
-                        text-align: center;
-                        padding: 7px 0px;
-                        background-color: rgb(224, 224, 224);
-                        border-radius: 5px;
-                        margin: 0px 15px;
-                        border: none;
-
-                        &:focus {
-                            outline: none;
-                        }
-                    }
-                }  
-            }
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
         }
+    }
+
+    &Buy {
+        
+        &Cort {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        &Order {
+            border: none;
+            background: rgb(223, 223, 223);
+            padding: 7px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    }
+
+    &Head {
+        display: flex;
+        justify-content: space-between;
+        
+        &Title {
+            font-size: 28px;
+        }
+
+        &Close {
+            cursor: pointer;
+        }
+    }
+}
+
+.active {
+    transform: translateX(0%);
+    transition: 0.6s;
+}
