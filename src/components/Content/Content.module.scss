@@ -12,6 +12,6 @@
     &Main {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        margin-top: 30px;
+        margin: 25px 0 25px 0;
     }
 }

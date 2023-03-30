@@ -24,7 +24,7 @@ interface IProduct {
 }
 
 const enum Status {
-    LOADING = 'Loading',
+    LOADING = 'loading',
     SUCCES = 'completed',
     ERROR = 'error',
 }

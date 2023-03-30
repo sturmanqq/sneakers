@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useAppDispatch } from '../../../../hooks';
 import { deleteFavoriteFetch } from '../../../../redux/favoriteSlice';
 import { deleteFavoriteRefetch } from '../../../../redux/refetch/refetch';
