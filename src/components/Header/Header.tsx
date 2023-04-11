@@ -7,6 +7,7 @@ import { favoriteFetch } from '../../redux/favoriteSlice'
 import { cartFetch } from '../../redux/cartSlice'
 import Favorite from './Favorite/Favorite'
 import Cart from './Cart/Cart'
+import { Link } from 'react-router-dom'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
@@ -42,7 +43,7 @@ const Header: React.FC = () => {
     }, [cartList])
 
     return (
-        <div className={styles.header}>
+        <header className={styles.header}>
 
             {(openCart || openFavorite) && <div  className={styles.headerOverlay}>     
                             </div>}
@@ -50,9 +51,10 @@ const Header: React.FC = () => {
             <Favorite openFavorite={openFavorite} setOpenFavorite={setOpenFavorite}/>
             <Cart openCart={openCart} setOpenCart={setOpenCart}/>
 
+            
             <div className={styles.headerName}>
-                <img src='/images/footshop.jpg' className={styles.headerNameLogo}/>
-                <div className={styles.headerNameTitle}>SneakersShop</div>
+                    <img src='/images/footshop.jpg' className={styles.headerNameMenuLogo}/>
+                    <div className={styles.headerNameMenuTitle}>SneakersShop</div>
             </div>
 
             <input value={searchValue} onChange={handleSearchValue} placeholder='Поиск...' type="text" className={styles.headerSearch} />
@@ -64,7 +66,7 @@ const Header: React.FC = () => {
                 </div>
                 <img onClick={() => setOpenFavorite(true)} src='/images/heart.png' className={styles.headerPurchasesFavourites}/>
             </div>
-        </div>
+        </header>
     )
 }
 

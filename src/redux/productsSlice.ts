@@ -5,7 +5,7 @@ export const productsFetch = createAsyncThunk<IProduct[], IFilters>(
     'products/productsFetch', 
     async (params) => {
         const {searchValue, pageValue, category, sortBy, order} = params;
-        const {data} = await axios.get<IProduct[]>(`http://localhost:3001/products?_page=${pageValue}&_limit=4&q=${searchValue}${category}&_sort=${sortBy}&_order=${order}`);
+        const {data} = await axios.get<IProduct[]>(`http://localhost:3001/products?_page=${pageValue}&_limit=8&q=${searchValue}${category}&_sort=${sortBy}&_order=${order}`);
         return data;
 })
 

@@ -1,0 +1,33 @@
+.welcome {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+    img{
+        height: 100px;
+        width: 80%;
+        height: 70%;
+        background-size: contain;
+        border-radius: 15px;  
+        margin: 20px 0 10px 0; 
+    }
+    
+    &Catalog {
+        height: 20%;
+        display: flex;
+        font-size: 22px;
+
+        &Products {
+            align-self: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+            border: 3px solid black;
+            padding: 10px;
+            border-radius: 25px;
+        }
+    }
+}

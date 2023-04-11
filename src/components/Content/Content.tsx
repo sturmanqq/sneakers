@@ -11,9 +11,9 @@ import Skeleton from './Skeleton/Skeleton'
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list);
-    const {status}  = useAppSelector(state => state.productReducer);
+    const { status }  = useAppSelector(state => state.productReducer);
 
-    const {searchValue, pageValue, categoryValue, sortValue} = useAppSelector(state => state.filterReducer);
+    const { searchValue, pageValue, categoryValue, sortValue } = useAppSelector(state => state.filterReducer);
 
     const dispatch = useAppDispatch();
 
@@ -36,7 +36,7 @@ const Content: React.FC = () => {
     }
 
     return (
-        <div className={styles.content}>
+        <main className={styles.content}>
             <div className={styles.contentFilters}>
                 <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
                 <Sort/>
@@ -52,7 +52,7 @@ const Content: React.FC = () => {
             }
             </div>
             <Pagination currentPage={pageValue} onChangePage={onChangePage}/>
-        </div>
+        </main>
     )
 }
 

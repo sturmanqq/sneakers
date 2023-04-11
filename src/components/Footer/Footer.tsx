@@ -2,7 +2,7 @@ import styles from './Footer.module.scss'
 
 const Footer: React.FC = () => {
     return (
-        <div className={styles.footer}>
+        <footer className={styles.footer}>
             <ul className={styles.footerUl}>
                 <li className={styles.footerUlTitle}>Поддержка</li>
                 <li>Справка</li>
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                     <img src="images/vk.png" alt="" />
                 </div>
             </div>
-        </div>
+        </footer>
     )
 }
 
