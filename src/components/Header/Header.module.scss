@@ -19,20 +19,6 @@
         z-index: 1;
     }
 
-    &Search {
-        height: 35px;
-        width: 320px;
-        align-self: center;
-        padding: 15px 10px;
-        background: rgb(226, 224, 224);
-        border: none;
-        font-size: 18px;
-
-        &:focus, &:hover {
-            outline:1px solid rgb(167, 166, 166);
-        }
-    }
-
     &Name {
         display: flex;
         padding-left: 20px;

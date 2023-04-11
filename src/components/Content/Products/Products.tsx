@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { addCartFetch, updateCartFetch } from '../../../redux/cartSlice';
 import { addFavoriteFetch, deleteFavoriteFetch } from '../../../redux/favoriteSlice';

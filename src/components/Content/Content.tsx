@@ -8,6 +8,7 @@ import { addCategory, addPageValue } from '../../redux/filter/filter'
 import Categories from './Category/Categories'
 import Sort from './Sort/Sort'
 import Skeleton from './Skeleton/Skeleton'
+import Search from './Search/Search'
 
 const Content: React.FC = () => {
     const products = useAppSelector(state => state.productReducer.list);
@@ -39,6 +40,7 @@ const Content: React.FC = () => {
         <main className={styles.content}>
             <div className={styles.contentFilters}>
                 <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
+                <Search/>
                 <Sort/>
             </div>
             <div className={styles.contentMain}>
