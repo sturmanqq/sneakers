@@ -20,10 +20,6 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
 
     const dispatch = useAppDispatch();
 
-    // const handleAddFavorite = () => {
-    //     dispatch(addFavorite({id, img, title, price}))
-    // }
-
     const handleFavorite = () => {
         dispatch(addFavoriteRefetch({id, img, title, price}));
         

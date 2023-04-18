@@ -32,19 +32,15 @@ const Header: React.FC = () => {
     return (
         <header className={styles.header}>
 
-            {(openCart || openFavorite) && <div  className={styles.headerOverlay}>     
-                            </div>}
+            {(openCart || openFavorite) && <div  className={styles.headerOverlay}></div>}
                             
             <Favorite openFavorite={openFavorite} setOpenFavorite={setOpenFavorite}/>
             <Cart openCart={openCart} setOpenCart={setOpenCart}/>
-
             
-            <div className={styles.headerName}>
-                    <img src='/images/footshop.jpg' className={styles.headerNameMenuLogo}/>
-                    <div className={styles.headerNameMenuTitle}>SneakersShop</div>
-            </div>
-
-            
+            <Link to='/' className={styles.headerName}>
+                <img src='/images/footshop.jpg' className={styles.headerNameMenuLogo}/>
+                <div className={styles.headerNameMenuTitle}>SneakersShop</div>
+            </Link>
 
             <div className={styles.headerPurchases}>
                 <div className={styles.headerPurchasesContainer}>

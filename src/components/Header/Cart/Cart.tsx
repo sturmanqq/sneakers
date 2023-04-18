@@ -9,9 +9,9 @@ interface ICart {
 
 const Cart: React.FC<ICart> = ({openCart, setOpenCart}) => {
 
-    const cartItems = useAppSelector(state => state.cartReducer.list)
+    const cartItems = useAppSelector(state => state.cartReducer.list);
 
-    const result = cartItems.reduce((sum, item) => sum + (item.price * item.count), 0)
+    const result = cartItems.reduce((sum, item) => sum + (item.price * item.count), 0);
 
     return (
         <div className={`${styles.cart} ${openCart ? styles.active : ''}`}>
@@ -20,11 +20,11 @@ const Cart: React.FC<ICart> = ({openCart, setOpenCart}) => {
                 <div onClick={() => setOpenCart(false)} className={styles.cartHeadClose}>X</div>
             </div>
             <div className={styles.cartOverflow}>
-            {cartItems.length <= 0 
-                ?<div className={styles.cartOverflowEmpty}>
-                    <div>Корзина пуста...</div>
-                </div> 
-                : cartItems.map(item => <CartProduct key={item.id} id={item.id} img={item.img} title={item.title} price={item.price} count={item.count}/>)}
+                {cartItems.length <= 0 
+                    ?   <div className={styles.cartOverflowEmpty}>
+                            <div>Корзина пуста...</div>
+                        </div> 
+                    :   cartItems.map(item => <CartProduct key={item.id} id={item.id} img={item.img} title={item.title} price={item.price} count={item.count}/>)}
             </div>        
             {cartItems.length > 0 && <div className={styles.cartBuy}>
                 <div className={styles.cartBuyCort}>Общая цена: {result} р.</div>

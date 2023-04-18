@@ -1,0 +1,10 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &Page {
+        font-size: 32px;
+        font-weight: bold;
+    }
+}

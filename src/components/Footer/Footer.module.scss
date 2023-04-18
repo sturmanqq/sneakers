@@ -8,8 +8,16 @@
     font-family: 'Roboro', sans-serif;
     line-height: 30px;
 
-    &Ul {
+    &List {
         max-width: 220px;
+        display: flex;
+        flex-direction: column;
+        
+        a {
+            text-decoration: none;
+            color: white;
+            margin-top: 5px;
+        }
 
         &Social {
             display: flex;

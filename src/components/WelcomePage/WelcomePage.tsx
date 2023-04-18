@@ -6,7 +6,7 @@ const WelcomePage = () => {
         <div className={styles.welcome}>
             <img src="/images/background.png" alt="" />
             <div className={styles.welcomeCatalog}>
-                <Link to='/products' className={styles.welcomeCatalogProducts}>Перейти к каталогу</Link>
+                <Link to='/products' onClick={() => window.scrollTo(0, 0)} className={styles.welcomeCatalogProducts}>Перейти к каталогу</Link>
             </div>
             
         </div>

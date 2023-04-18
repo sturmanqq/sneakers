@@ -1,13 +1,22 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const productsFetch = createAsyncThunk<IProduct[], IFilters>(
-    'products/productsFetch', 
-    async (params) => {
-        const {searchValue, pageValue, category, sortBy, order} = params;
-        const {data} = await axios.get<IProduct[]>(`http://localhost:3001/products?_page=${pageValue}&_limit=8&q=${searchValue}${category}&_sort=${sortBy}&_order=${order}`);
-        return data;
-})
+    export const productsFetch = createAsyncThunk<IProduct[], IFilters, {rejectValue: IError}>(
+        'products/productsFetch', 
+
+        async function (params, {rejectWithValue}) {
+
+            try {
+                const {searchValue, pageValue, category, sortBy, order} = params;
+                const responce = await axios.get(`http://localhost:3001/products?_page=${pageValue}&_limit=8&q=${searchValue}${category}&_sort=${sortBy}&_order=${order}`);
+                return responce.data;
+            } catch (error) {
+                if(axios.isAxiosError(error)) {
+                    return rejectWithValue(await error.response as IError);
+                };
+            };
+    });
+
 
 interface IFilters {
     searchValue: string,
@@ -29,14 +38,26 @@ const enum Status {
     ERROR = 'error',
 }
 
+interface IError {
+    status: number,
+    statusText: string,
+};
+
+
 interface IProductList {
     list: IProduct[],
     status: Status,
+    error: IError,
+    
 }
 
 const initialState: IProductList = {
     list: [],
     status: Status.LOADING,
+    error: {
+        status: 200,
+        statusText: '',
+    },
 }
 
 export const productsSlice = createSlice({
@@ -51,8 +72,13 @@ export const productsSlice = createSlice({
         builder.addCase(productsFetch.fulfilled, (state, action) => {
             state.list = action.payload;
             state.status = Status.SUCCES;
+            console.log(action.payload)
         });
-        builder.addCase(productsFetch.rejected, (state) => {
+        builder.addCase(productsFetch.rejected, (state, action) => {
+
+            if(action.payload) {
+                state.error = action.payload;
+            }
             state.status = Status.ERROR;
         });
     }
@@ -60,4 +86,4 @@ export const productsSlice = createSlice({
 
 export const {} = productsSlice.actions
 
-export default productsSlice.reducer
+export default productsSlice.reducer 

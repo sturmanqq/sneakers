@@ -1,10 +1,10 @@
-import styles from './App.module.scss';
 import Content from '../components/Content/Content';
-import Footer from '../components/Footer/Footer';
-import Header from '../components/Header/Header';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RootPage from '../RootPage/RootPage';
 import WelcomePage from '../components/WelcomePage/WelcomePage';
+import FooterPage from '../components/Footer/FooterPage/FooterPage';
+
+function App() {
 
 const router = createBrowserRouter([
   {
@@ -13,20 +13,19 @@ const router = createBrowserRouter([
     children: [
       {index: true, element: <WelcomePage/>},
       {
-        path: '/products',
+        path: 'products',
         element: <Content/>,
+      },
+      {
+        path: 'footerPage',
+        element: <FooterPage/>,
       },
     ]
   }
 ]);
 
-function App() {
   return ( 
-    <div className={styles.app}> 
-      <Header />
       <RouterProvider router={router}/>
-      <Footer />
-    </div>
   );
 }
 

@@ -1,31 +1,33 @@
+import { Link } from 'react-router-dom'
 import styles from './Footer.module.scss'
 
 const Footer: React.FC = () => {
+
     return (
         <footer className={styles.footer}>
-            <ul className={styles.footerUl}>
-                <li className={styles.footerUlTitle}>Поддержка</li>
-                <li>Справка</li>
-                <li>Возврат и обмен</li>
-                <li>Доставка</li>
-                <li>Отслеживание</li>
-            </ul>
-            <ul className={styles.footerUl}>
-                <li className={styles.footerUlTitle}>О компании</li>
-                <li>О нас</li>
-                <li>Скидки</li>
-                <li>Карьера</li>
-                <li>Акции</li>
-            </ul>
-            <ul className={styles.footerUl}>
-                <li className={styles.footerUlTitle}>Продукты</li>
-                <li>Обувь</li>
-                <li>Одежда</li>
-                <li>Распродажа</li>
-            </ul>
-            <div className={styles.footerUl}>
-                <p className={styles.footerUlTitle}>Подпишитесь на нас</p>
-                <div className={styles.footerUlSocial}>
+            <div className={styles.footerList}>
+                <p className={styles.footerListTitle}>Поддержка</p>
+                <Link to='/footerPage'>Справка</Link>
+                <Link to='/footerPage'>Возврат и обмен</Link>
+                <Link to='/footerPage'>Доставка</Link>
+                <Link to='/footerPage'>Отслеживание</Link>
+            </div>
+            <div className={styles.footerList}>
+                <p className={styles.footerListTitle}>О компании</p>
+                <Link to='/footerPage'>О нас</Link>
+                <Link to='/footerPage'>Скидки</Link>
+                <Link to='/footerPage'>Карьера</Link>
+                <Link to='/footerPage'>Акции</Link>
+            </div>
+            <div className={styles.footerList}>
+                <p className={styles.footerListTitle}>Продукты</p>
+                <Link to='/footerPage'>Обувь</Link>
+                <Link to='/footerPage'>Одежда</Link>
+                <Link to='/footerPage'>Распродажа</Link>
+            </div>
+            <div className={styles.footerList}>
+                <p className={styles.footerListTitle}>Подпишитесь на нас</p>
+                <div className={styles.footerListSocial}>
                     <img src="images/instagram.png" alt="" />
                     <img src="images/twitter.png" alt="" />
                     <img src="images/vk.png" alt="" />

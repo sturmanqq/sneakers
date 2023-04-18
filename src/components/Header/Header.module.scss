@@ -22,8 +22,11 @@
     &Name {
         display: flex;
         padding-left: 20px;
+        text-decoration: none;
+        color: black;
 
         &Menu {
+            
             &Logo {
                 background-size: contain;
                 height: 55px;

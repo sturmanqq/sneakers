@@ -16,7 +16,13 @@ const Sort: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const handleSort = (obj: ISort) => {
-        dispatch(addSort(obj))
+        dispatch(addSort(obj));
+        setOpen(false);
+    }
+
+    const handleClearSort = () => {
+        dispatch(addSort({title: '', titleBd: '', sort: ''}));
+        setOpen(false);
     }
 
     const sortList = [
@@ -28,12 +34,12 @@ const Sort: React.FC = () => {
     return(
         <div className={styles.sort}>
             <div className={styles.sortName}>
-                <div className={styles.sortNameT} onClick={() => setOpen(!open)} >Сортировать по : </div>
-                <span className={styles.sortNameP}>{sortItems.title}</span>
+                <div className={styles.sortNameT} onClick={() => setOpen(!open)} >Сортировать по : {sortItems.title}</div>
             </div>
             {open && <div className={styles.sortMenu}>
                 <ul className={styles.sortMenuUl}>
                      {sortList.map((obj, i) => <li key={i} onClick={() => handleSort(obj)} className={styles.sortMenuUlItem}>{obj.title}</li>)}
+                     <span onClick={handleClearSort} >очистить фильтры</span>
                 </ul>
             </div>}
         </div>

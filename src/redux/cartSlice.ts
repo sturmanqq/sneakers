@@ -4,8 +4,8 @@ import axios from 'axios';
 export const cartFetch = createAsyncThunk<IPurchase[]>(
     'cart/CartFetch',
     async () => {
-        const { data } = await axios.get<IPurchase[]>('http://localhost:3001/cart');
-        return data;
+            const responce = await axios.get<IPurchase[]>('http://localhost:3001/cart');
+            return responce.data;
     }
 );
 
@@ -75,13 +75,11 @@ export const cartSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase (cartFetch.pending, (state) => {
-
         });
         builder.addCase (cartFetch.fulfilled, (state, action) => {
             state.list = action.payload;
         });
-        builder.addCase (cartFetch.rejected, (state) => {
-            
+        builder.addCase (cartFetch.rejected, (state, action) => {   
         });
     }
 })

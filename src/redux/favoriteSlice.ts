@@ -51,18 +51,7 @@ export const favoriteSlice = createSlice({
     name: 'favorite',
     initialState,
     reducers: {
-        // addFavorite(state, action: PayloadAction<{id: string, img: string, title: string, price: number}>) {
-        //     const item = state.list.find(item => item.id === action.payload.id )
 
-        //     if(item) {
-        //         state.list = state.list.filter(item => item.id !== action.payload.id);
-        //     } else {
-        //         state.list.push(action.payload);
-        //     }      
-        // },
-        // removeFavorite(state, action: PayloadAction<string>) {
-        //         state.list = state.list.filter(item => item.id !== action.payload)   
-        // }
     },
     extraReducers: (builder) => {
         builder.addCase(favoriteFetch.pending, (state) => {
@@ -75,16 +64,6 @@ export const favoriteSlice = createSlice({
         builder.addCase(favoriteFetch.rejected, (state) => {
             state.status = Status.ERROR;
         });
-        // builder.addCase(deleteFavoriteFetch.pending, (state) => {
-        //     state.status = Status.LOADING;
-        // });
-        // builder.addCase(deleteFavoriteFetch.fulfilled, (state, action) => {
-        //     state.list = action.payload;
-        //     state.status = Status.SUCCES;
-        // });
-        // builder.addCase(deleteFavoriteFetch.rejected, (state) => {
-        //     state.status = Status.ERROR;
-        // });
     },
 });
 
