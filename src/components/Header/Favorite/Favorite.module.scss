@@ -11,6 +11,14 @@
     transform: translateX(100%);
     transition: 0.6s;
     
+    @media (max-width: 550px) {
+        width: 80%;
+    }
+
+    @media (max-width: 400px) {
+        width: 100%;
+    }
+    
     &Td {
         display: grid;
         grid-template-columns: 1fr 1fr;

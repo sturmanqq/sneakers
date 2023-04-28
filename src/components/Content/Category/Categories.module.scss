@@ -1,8 +1,14 @@
 .category {
+    align-self: center;
+
     ul {
         display: inline-flex;
         font-size: 18px;
         font-weight: bold;
+
+        @media (max-width: 1130px) {
+            font-size: 12px;
+        }
 
         .categoryName {
             padding: 8px 14px;
@@ -11,6 +17,12 @@
             margin-right: 15px;
             cursor: pointer;
             user-select: none;
+
+            @media (max-width: 1130px) {
+                align-self: center;
+                padding: 6px 6px;
+                margin-right: 8px;
+            }
 
             &Active {
                 background-color: black;
@@ -21,6 +33,12 @@
                 margin-right: 15px;
                 cursor: pointer;
                 user-select: none;
+
+                @media (max-width: 1130px) {
+                    align-self: center;
+                    padding: 6px 6px;
+                    margin-right: 8px;
+                }
             }
 
             &:hover {

@@ -2,6 +2,15 @@
     position: relative;
     font-weight: bold;
     user-select: none;
+    align-self: center;
+
+    @media (max-width: 820px) {
+        margin: 5px;
+    }
+
+    @media (max-width: 425px) {
+        margin: 0;
+    }
 
     &Name {
         cursor: pointer;
@@ -10,6 +19,14 @@
         padding: 5px 10px; 
         display: flex;
         width: 365px;
+
+        @media (max-width: 1130px) {
+            margin-right: 0;
+        }
+
+        @media (max-width: 425px) {
+            width: auto;
+        }
     }
 
     &Menu {
@@ -21,6 +38,10 @@
         margin-top: 10px;
         box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.2);
         z-index: 2;
+
+        @media (max-width: 1130px) {
+            width: 180px;
+        }
         
         &Ul {
             padding: 12px;
@@ -29,6 +50,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            @media (max-width: 1130px) {
+                font-size: 14px;
+                line-height: 25px;
+            }
 
             &Item {
                 cursor: pointer;
@@ -42,6 +68,10 @@
                 text-align: center;
                 width: 90%;
                 cursor: pointer;
+
+                @media (max-width: 1130px) {
+                    margin-top: 5px;
+                }
             }
         }
     }

@@ -1,6 +1,10 @@
 .contentProducts {
     align-self: center;
     justify-self: center;
+
+    @media (max-width: 680px) {
+        margin-bottom: 10px;
+    }
     
         &Favorite {
             margin-top: 15px;
@@ -9,11 +13,31 @@
             width: 20px;
             height: 20px;
             cursor: pointer;
+
+            @media (max-width: 1130px) {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
         }
 
         &Img {
             width: 220px;
             height: 220px;
+
+            @media (max-width: 1130px) {
+                width: 170px;
+                height: 170px;
+            }
+
+            @media (max-width: 680px) {
+                width: 130px;
+                height: 130px;
+            }
+
+            @media (max-width: 350px) {
+                width: 200px;
+                height: 200px;
+            }
         }
 
         &Options {
@@ -21,13 +45,39 @@
             justify-content: space-between;
             padding: 10px 0px;
 
+            @media (max-width: 1130px) {
+                padding: 5px 0;
+            }
+
+            @media (max-width: 680px) {
+                flex-direction: column;
+                align-items: center;
+            }
+
             div {
                 padding-bottom: 5px;
+
+                @media (max-width: 1130px) {
+                    font-size: 15px;
+                }
+
+                @media (max-width: 350px) {
+                    font-size: 20px;
+                }
 
                 p {
                     padding-bottom: 5px;
                     font-family: 'Roboto Condensed', sans-serif;
-                    font-size: 20px;      
+                    font-size: 20px;  
+                    
+                    @media (max-width: 1130px) {
+                        font-size: 15px;
+                    }
+
+                    @media (max-width: 350px) {
+                        font-size: 20px;
+                        text-align: center;
+                    }
                 } 
             }
 
@@ -40,6 +90,16 @@
                 font-weight: bold;
                 cursor: pointer;
                 background: rgb(223, 223, 223);
+
+                @media (max-width: 1130px) {
+                    padding: 4px; 
+                    font-size: 12px;
+                }
+
+                @media (max-width: 350px) {
+                    padding: 7px;
+                    font-size: 14px;
+                }
             }
         }
 }

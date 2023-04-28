@@ -43,22 +43,22 @@ const Content: React.FC = () => {
             {status === 'error' ? 
                 <ErrorPage/> 
                 : <div>
-                    <div className={styles.contentFilters}>
-                        <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
-                        <Search/>
-                        <Sort/>
-                    </div>
-                    <div className={styles.contentMain}>
-                    {status === 'loading' ? skeleton : products.map((product) => <Products 
+                        <div className={styles.contentFilters}>
+                            <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
+                            <Search/>
+                            <Sort/>
+                        </div>
+                        <div className={styles.contentMain}>
+                        {status === 'loading' ? skeleton : products.map((product) => <Products 
                                                                 key={product.id}
                                                                 img={product.img} 
                                                                 title={product.title} 
                                                                 id={product.id} 
                                                                 price={product.price}
                                                             />)
-                    }
-                    </div>
-                    <Pagination currentPage={pageValue} onChangePage={onChangePage}/>
+                        }
+                        </div>
+                        <Pagination currentPage={pageValue} onChangePage={onChangePage}/>
                     </div>}
             </main>
     )
