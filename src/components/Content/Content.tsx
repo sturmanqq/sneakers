@@ -10,11 +10,12 @@ import Sort from './Sort/Sort'
 import Skeleton from './Skeleton/Skeleton'
 import Search from './Search/Search'
 import ErrorPage from '../ErrorPages/ErrorProducts/ErrorPage'
+import { addCartRefetch } from '../../redux/refetch/refetch'
+import { productList } from '../../redux/selectors/selectors'
 
 const Content: React.FC = () => {
-
-    const products = useAppSelector(state => state.productReducer.list);
-    const { status }  = useAppSelector(state => state.productReducer);
+    
+    const { list: products, status } = useAppSelector(productList);
 
     const { searchValue, pageValue, categoryValue, sortValue } = useAppSelector(state => state.filterReducer);
 

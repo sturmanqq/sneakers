@@ -72,7 +72,6 @@ export const productsSlice = createSlice({
         builder.addCase(productsFetch.fulfilled, (state, action) => {
             state.list = action.payload;
             state.status = Status.SUCCES;
-            console.log(action.payload)
         });
         builder.addCase(productsFetch.rejected, (state, action) => {
 

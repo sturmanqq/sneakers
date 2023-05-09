@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../../hooks'
 import { deleteCartFetch, minusCartFetch, updateCartFetch } from '../../../../redux/cartSlice';
 import { minusCartRefetch, plusCartRefetch, deleteCartRefetch } from '../../../../redux/refetch/refetch';
+import { cartList } from '../../../../redux/selectors/selectors';
 
 import styles from './CartProduct.module.scss'
 
@@ -13,7 +14,7 @@ interface ICart {
 }
 
 const CartProduct: React.FC<ICart> = ({id, img, title, price, count}) => {
-    const cart = useAppSelector((state => state.cartReducer.list.find(item => item.id === id)))
+    const cart = useAppSelector(cartList(id));
 
     const dispatch = useAppDispatch();
 

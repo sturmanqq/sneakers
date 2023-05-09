@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../../hooks';
+import { cartItem, resultCart } from '../../../redux/selectors/selectors';
 import styles from './Cart.module.scss'
 import CartProduct from './CartProduct/CartProduct';
 
@@ -9,9 +10,9 @@ interface ICart {
 
 const Cart: React.FC<ICart> = ({openCart, setOpenCart}) => {
 
-    const cartItems = useAppSelector(state => state.cartReducer.list);
+    const cartItems = useAppSelector(cartItem);
 
-    const result = cartItems.reduce((sum, item) => sum + (item.price * item.count), 0);
+    const result = useAppSelector(resultCart);
 
     return (
         <div className={`${styles.cart} ${openCart ? styles.active : ''}`}>

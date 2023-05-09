@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './Categories.module.scss'
 
 interface ICategories {
@@ -8,7 +9,7 @@ interface ICategories {
 const Categories: React.FC<ICategories> = ({categoryValue, onChangeCategory}) => {
 
     const categories = ['Все товары', 'Обувь', 'Одежда']
-
+    console.log('Render categories')
     return (
         <div className={styles.category}>
             <ul>

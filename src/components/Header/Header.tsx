@@ -8,18 +8,17 @@ import { cartFetch } from '../../redux/cartSlice'
 import Favorite from './Favorite/Favorite'
 import Cart from './Cart/Cart'
 import { Link } from 'react-router-dom'
+import { refetch, resultCart } from '../../redux/selectors/selectors'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
     const [openCart, setOpenCart] = useState(false);
 
     const dispatch = useAppDispatch();
-
-    const itemsC = useAppSelector(state => state.cartReducer.list)
     
-    const { favoriteList, cartList } = useAppSelector(state => state.refetchReducer)
+    const { favoriteList, cartList } = useAppSelector(refetch);
 
-    const amount = itemsC.reduce((sum, item) => sum + item.count, 0)
+    const result = useAppSelector(resultCart);
 
     useEffect(() => {
         dispatch(favoriteFetch())
@@ -45,7 +44,7 @@ const Header: React.FC = () => {
             <div className={styles.headerPurchases}>
                 <div className={styles.headerPurchasesContainer}>
                     <img onClick={() => setOpenCart(true)} src='/images/cart.png' className={styles.headerPurchasesContainerCart}/>
-                    <div className={styles.headerPurchasesContainerAmount}>{amount}</div>
+                    <div className={styles.headerPurchasesContainerAmount}>{result} р.</div>
                 </div>
                 <img onClick={() => setOpenFavorite(true)} src='/images/heart.png' className={styles.headerPurchasesFavourites}/>
             </div>

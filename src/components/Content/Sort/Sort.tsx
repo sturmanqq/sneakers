@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { addSort } from '../../../redux/filter/filter'
+import { sortList } from '../../../redux/selectors/selectors'
 import styles from './Sort.module.scss'
 
 interface ISort {
@@ -10,7 +11,8 @@ interface ISort {
 }
 
 const Sort: React.FC = () => {
-    const sortItems = useAppSelector(state => state.filterReducer.sortValue) 
+    const sortItems = useAppSelector(sortList);
+
     const [open, setOpen] = useState(false)
 
     const dispatch = useAppDispatch();
@@ -25,7 +27,7 @@ const Sort: React.FC = () => {
         setOpen(false);
     }
 
-    const sortList = [
+    const sortArr = [
         {title: 'популярности', titleBd: 'popularity', sort: 'desc'},
         {title: 'возрастанию цены', titleBd: 'price',sort: 'asc'}, 
         {title: 'убыванию цены', titleBd: 'price',sort: 'desc'},
@@ -38,7 +40,7 @@ const Sort: React.FC = () => {
             </div>
             {open && <div className={styles.sortMenu}>
                 <ul className={styles.sortMenuUl}>
-                     {sortList.map((obj, i) => <li key={i} onClick={() => handleSort(obj)} className={styles.sortMenuUlItem}>{obj.title}</li>)}
+                     {sortArr.map((obj, i) => <li key={i} onClick={() => handleSort(obj)} className={styles.sortMenuUlItem}>{obj.title}</li>)}
                      <span onClick={handleClearSort} >очистить фильтры</span>
                 </ul>
             </div>}
@@ -47,4 +49,4 @@ const Sort: React.FC = () => {
     )
 }
 
-export default Sort
+export default Sort;

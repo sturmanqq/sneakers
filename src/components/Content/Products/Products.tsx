@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { addCartFetch, updateCartFetch } from '../../../redux/cartSlice';
 import { addFavoriteFetch, deleteFavoriteFetch } from '../../../redux/favoriteSlice';
 import { addFavoriteRefetch, addCartRefetch } from '../../../redux/refetch/refetch';
+import { cartList, favoriteList } from '../../../redux/selectors/selectors';
 import styles from './Products.module.scss'
 
 interface IProduct {
@@ -12,9 +13,9 @@ interface IProduct {
 }
 
 const Products: React.FC<IProduct> = ({id, img, title, price}) => {
-    
-    const favorite = useAppSelector(state => state.favoriteReducer.list.find(item => item.id === id));
-    const cart = useAppSelector(state => state.cartReducer.list.find(item => item.id === id));
+
+    const favorite = useAppSelector(favoriteList(id));
+    const cart = useAppSelector(cartList(id));
 
     const props = {id, img, title, price};
 

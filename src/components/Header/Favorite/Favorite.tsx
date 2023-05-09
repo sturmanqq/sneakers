@@ -1,6 +1,7 @@
 import FavoriteProduct from "./FavoriteProduct/FavoriteProduct";
 import styles from './Favorite.module.scss';
 import { useAppSelector } from "../../../hooks";
+import { favoriteItem } from "../../../redux/selectors/selectors";
 
 interface IFavorite {
     openFavorite: boolean,
@@ -9,7 +10,7 @@ interface IFavorite {
 
 const Favorite: React.FC<IFavorite> = ({openFavorite, setOpenFavorite}) => {
 
-    const favoriteItems = useAppSelector(state => state.favoriteReducer.list)
+    const favoriteItems = useAppSelector(favoriteItem);
 
     return (
         <div className={`${styles.favorite} ${openFavorite ? styles.active : ''}`}>
