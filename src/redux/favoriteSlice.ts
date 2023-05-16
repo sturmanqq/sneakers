@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { IProduct as IFavorite, IFavorites, Status,  } from '../types/types';
 
 
 export const favoriteFetch = createAsyncThunk<IFavorite[]>(
@@ -23,24 +24,6 @@ export const deleteFavoriteFetch = createAsyncThunk(
         await axios.delete(`http://localhost:3001/favorite/${id}`)
     }
 )
-
-const enum Status {
-    LOADING = 'Loading',
-    SUCCES = 'completed',
-    ERROR = 'error',
-}
-
-interface IFavorite {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-}
-
-interface IFavorites {
-    list: IFavorite[],
-    status: Status,
-}
 
 const initialState: IFavorites = {
     list: [],

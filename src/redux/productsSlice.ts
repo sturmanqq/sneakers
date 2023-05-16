@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
+import { IError, IFilters, IProduct, IProductList, Status } from '../types/types';
 
     export const productsFetch = createAsyncThunk<IProduct[], IFilters, {rejectValue: IError}>(
         'products/productsFetch', 
@@ -16,40 +17,6 @@ import axios from 'axios'
                 };
             };
     });
-
-
-interface IFilters {
-    searchValue: string,
-    pageValue: number,
-    category: string,
-    sortBy: string,
-    order: string,
-}
-interface IProduct {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-}
-
-const enum Status {
-    LOADING = 'loading',
-    SUCCES = 'completed',
-    ERROR = 'error',
-}
-
-interface IError {
-    status: number,
-    statusText: string,
-};
-
-
-interface IProductList {
-    list: IProduct[],
-    status: Status,
-    error: IError,
-    
-}
 
 const initialState: IProductList = {
     list: [],

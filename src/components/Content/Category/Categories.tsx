@@ -1,15 +1,21 @@
 import React from 'react'
 import styles from './Categories.module.scss'
+import { filters } from '../../../redux/selectors/selectors';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { addCategory } from '../../../redux/filter/filter';
 
-interface ICategories {
-    categoryValue: number,
-    onChangeCategory: (index: number) => void,
-}
+const Categories: React.FC = () => {
 
-const Categories: React.FC<ICategories> = ({categoryValue, onChangeCategory}) => {
+    const { categoryValue } = useAppSelector(filters);
+
+    const dispatch = useAppDispatch();
+
+    const onChangeCategory = (index: number) => {
+        dispatch(addCategory(index))
+    }
 
     const categories = ['Все товары', 'Обувь', 'Одежда']
-    console.log('Render categories')
+
     return (
         <div className={styles.category}>
             <ul>

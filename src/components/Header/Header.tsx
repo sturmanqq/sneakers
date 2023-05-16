@@ -1,32 +1,16 @@
-import {useState, ChangeEvent, useCallback, useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { addSearchValue } from '../../redux/filter/filter'
+import {useState } from 'react'
+import { useAppSelector } from '../../hooks'
 import styles from './Header.module.scss'
-import {debounce} from 'debounce'
-import { favoriteFetch } from '../../redux/favoriteSlice'
-import { cartFetch } from '../../redux/cartSlice'
 import Favorite from './Favorite/Favorite'
 import Cart from './Cart/Cart'
 import { Link } from 'react-router-dom'
-import { refetch, resultCart } from '../../redux/selectors/selectors'
+import { resultCart } from '../../redux/selectors/selectors'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
     const [openCart, setOpenCart] = useState(false);
 
-    const dispatch = useAppDispatch();
-    
-    const { favoriteList, cartList } = useAppSelector(refetch);
-
     const result = useAppSelector(resultCart);
-
-    useEffect(() => {
-        dispatch(favoriteFetch())
-    }, [favoriteList])
- 
-    useEffect(() => {
-        dispatch(cartFetch())
-    }, [cartList])
 
     return (
         <header className={styles.header}>

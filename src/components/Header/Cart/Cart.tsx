@@ -1,18 +1,24 @@
-import { useAppSelector } from '../../../hooks';
-import { cartItem, resultCart } from '../../../redux/selectors/selectors';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { cartItem, refetch, resultCart } from '../../../redux/selectors/selectors';
 import styles from './Cart.module.scss'
 import CartProduct from './CartProduct/CartProduct';
+import { cartFetch } from '../../../redux/cartSlice';
+import { ICartWindow } from '../../../types/types';
 
-interface ICart {
-    openCart: boolean,
-    setOpenCart: (value: boolean) => void,
-}
-
-const Cart: React.FC<ICart> = ({openCart, setOpenCart}) => {
+const Cart: React.FC<ICartWindow> = ({openCart, setOpenCart}) => {
 
     const cartItems = useAppSelector(cartItem);
 
     const result = useAppSelector(resultCart);
+    
+    const { cartList } = useAppSelector(refetch);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(cartFetch())
+    }, [cartList])
 
     return (
         <div className={`${styles.cart} ${openCart ? styles.active : ''}`}>

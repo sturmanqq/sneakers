@@ -1,16 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface ISort {
-    title: string,
-    titleBd: string,
-    sort: string,
-}
-interface IFilter{
-    searchValue: string,
-    pageValue: number,
-    categoryValue: number,
-    sortValue: ISort,
-}
+import { IFilter, ISort } from "../../types/types";
 
 const initialState: IFilter = {
     searchValue: '',

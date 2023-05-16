@@ -1,16 +1,22 @@
 import FavoriteProduct from "./FavoriteProduct/FavoriteProduct";
 import styles from './Favorite.module.scss';
-import { useAppSelector } from "../../../hooks";
-import { favoriteItem } from "../../../redux/selectors/selectors";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { favoriteItem, refetch } from "../../../redux/selectors/selectors";
+import { useEffect } from "react";
+import { favoriteFetch } from "../../../redux/favoriteSlice";
+import { IFavoriteWindow } from "../../../types/types";
 
-interface IFavorite {
-    openFavorite: boolean,
-    setOpenFavorite: (value: boolean) => void;
-}
-
-const Favorite: React.FC<IFavorite> = ({openFavorite, setOpenFavorite}) => {
+const Favorite: React.FC<IFavoriteWindow> = ({openFavorite, setOpenFavorite}) => {
 
     const favoriteItems = useAppSelector(favoriteItem);
+
+    const dispatch = useAppDispatch();
+
+    const { favoriteList } = useAppSelector(refetch);
+
+    useEffect(() => {
+        dispatch(favoriteFetch())
+    }, [favoriteList]);
 
     return (
         <div className={`${styles.favorite} ${openFavorite ? styles.active : ''}`}>

@@ -3,14 +3,8 @@ import { addCartFetch, updateCartFetch } from '../../../redux/cartSlice';
 import { addFavoriteFetch, deleteFavoriteFetch } from '../../../redux/favoriteSlice';
 import { addFavoriteRefetch, addCartRefetch } from '../../../redux/refetch/refetch';
 import { cartList, favoriteList } from '../../../redux/selectors/selectors';
+import { IProduct } from '../../../types/types';
 import styles from './Products.module.scss'
-
-interface IProduct {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-}
 
 const Products: React.FC<IProduct> = ({id, img, title, price}) => {
 
@@ -58,4 +52,4 @@ const Products: React.FC<IProduct> = ({id, img, title, price}) => {
     )
 }
 
-export default Products
+export default Products;

@@ -4,20 +4,19 @@ import styles from './Content.module.scss'
 import Products from './Products/Products'
 import {useEffect} from 'react'
 import Pagination from './Pagination/Pagination'
-import { addCategory, addPageValue } from '../../redux/filter/filter'
+import { addPageValue } from '../../redux/filter/filter'
 import Categories from './Category/Categories'
 import Sort from './Sort/Sort'
 import Skeleton from './Skeleton/Skeleton'
 import Search from './Search/Search'
 import ErrorPage from '../ErrorPages/ErrorProducts/ErrorPage'
-import { addCartRefetch } from '../../redux/refetch/refetch'
-import { productList } from '../../redux/selectors/selectors'
+import { filters, productList } from '../../redux/selectors/selectors'
 
 const Content: React.FC = () => {
     
     const { list: products, status } = useAppSelector(productList);
 
-    const { searchValue, pageValue, categoryValue, sortValue } = useAppSelector(state => state.filterReducer);
+    const { searchValue, pageValue, categoryValue, sortValue } = useAppSelector(filters);
 
     const dispatch = useAppDispatch();
 
@@ -35,17 +34,13 @@ const Content: React.FC = () => {
         dispatch(addPageValue(page));
       }; 
 
-    const onChangeCategory = (index: number) => {
-        dispatch(addCategory(index))
-    }
-
     return (
         <main className={styles.content}>
             {status === 'error' ? 
                 <ErrorPage/> 
                 : <div>
                         <div className={styles.contentFilters}>
-                            <Categories categoryValue={categoryValue} onChangeCategory={onChangeCategory}/>
+                            <Categories/>
                             <Search/>
                             <Sort/>
                         </div>

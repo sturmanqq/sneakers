@@ -1,13 +1,17 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
+export const filters = (state: RootState) => state.filterReducer;
+
 export const cartItem = (state: RootState) => state.cartReducer.list;
 
-export const favoriteItem = (state: RootState) => state.favoriteReducer.list
+export const favoriteItem = (state: RootState) => state.favoriteReducer.list;
 
 export const sortList = (state: RootState) => state.filterReducer.sortValue;
 
 export const productList = (state: RootState) => state.productReducer;
+
+export const errorStatus = (state: RootState) => state.productReducer.error;
 
 export const refetch = (state: RootState) => state.refetchReducer;
 

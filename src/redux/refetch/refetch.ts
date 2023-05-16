@@ -1,19 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface IItem {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-}
-
-interface IPurchase {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-    count: number,
-}
+import { IProduct as IItem, IPurchase } from '../../types/types';
 
 interface IRefetch {
     favoriteList: IItem[], 

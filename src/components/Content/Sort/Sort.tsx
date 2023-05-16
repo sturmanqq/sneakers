@@ -3,12 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { addSort } from '../../../redux/filter/filter'
 import { sortList } from '../../../redux/selectors/selectors'
 import styles from './Sort.module.scss'
-
-interface ISort {
-    title: string,
-    titleBd: string,
-    sort: string,
-}
+import { ISort } from '../../../types/types'
 
 const Sort: React.FC = () => {
     const sortItems = useAppSelector(sortList);

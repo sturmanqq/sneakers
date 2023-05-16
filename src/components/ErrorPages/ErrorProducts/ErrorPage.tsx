@@ -1,9 +1,10 @@
 import { useAppSelector } from '../../../hooks';
+import { errorStatus } from '../../../redux/selectors/selectors';
 import styles from './ErrorPage.module.scss'
 
 
 const ErrorPage = () => {
-    const {status, statusText} = useAppSelector(state => state.productReducer.error);
+    const {status, statusText} = useAppSelector(errorStatus);
 
     return (
         <div className={styles.error}>

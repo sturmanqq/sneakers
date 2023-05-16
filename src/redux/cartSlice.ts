@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { IPurchase } from '../types/types';
 
 export const cartFetch = createAsyncThunk<IPurchase[]>(
     'cart/CartFetch',
@@ -52,14 +53,6 @@ export const minusCartFetch = createAsyncThunk(
             await axios.put(`http://localhost:3001/cart/${id}`, newParams)
     }
 );
-
-interface IPurchase {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-    count: number,
-}
 
 interface IPurchases {
     list: IPurchase[],

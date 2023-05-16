@@ -6,9 +6,9 @@ import { addSearchValue } from '../../../redux/filter/filter';
 
 const Search: React.FC = () => {
     const [searchValue,setSearchValue ] = useState('');
+    
     const dispatch = useAppDispatch();
 
-        
     const updateSearchValue = useCallback(
         debounce((str: string) => {
           dispatch(addSearchValue(str));

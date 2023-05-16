@@ -1,14 +1,8 @@
 import { useAppDispatch } from '../../../../hooks';
 import { deleteFavoriteFetch } from '../../../../redux/favoriteSlice';
 import { deleteFavoriteRefetch } from '../../../../redux/refetch/refetch';
+import { IProduct as IFavorite } from '../../../../types/types';
 import styles from './FavoriteProduct.module.scss'
-
-interface IFavorite {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-}
 
 const FavoriteProduct: React.FC<IFavorite> = ({id, img, title, price}) => {
     const dispatch = useAppDispatch();

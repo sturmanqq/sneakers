@@ -2,16 +2,9 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks'
 import { deleteCartFetch, minusCartFetch, updateCartFetch } from '../../../../redux/cartSlice';
 import { minusCartRefetch, plusCartRefetch, deleteCartRefetch } from '../../../../redux/refetch/refetch';
 import { cartList } from '../../../../redux/selectors/selectors';
+import { IPurchase as ICart } from '../../../../types/types';
 
 import styles from './CartProduct.module.scss'
-
-interface ICart {
-    id: string,
-    img: string,
-    title: string,
-    price: number,
-    count: number,
-}
 
 const CartProduct: React.FC<ICart> = ({id, img, title, price, count}) => {
     const cart = useAppSelector(cartList(id));
