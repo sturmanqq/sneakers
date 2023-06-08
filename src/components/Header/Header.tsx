@@ -1,16 +1,25 @@
 import {useState } from 'react'
-import { useAppSelector } from '../../hooks'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import styles from './Header.module.scss'
 import Favorite from './Favorite/Favorite'
 import Cart from './Cart/Cart'
 import { Link } from 'react-router-dom'
 import { resultCart } from '../../redux/selectors/selectors'
+import { addCategory, addSearchValue, addSort } from '../../redux/filter/filter'
 
 const Header: React.FC = () => {
     const [openFavorite, setOpenFavorite] = useState(false);
     const [openCart, setOpenCart] = useState(false);
 
+    const dispatch = useAppDispatch();
+
     const result = useAppSelector(resultCart);
+
+    const handleDefault = () => {
+        dispatch(addCategory(0));
+        dispatch(addSearchValue(''));
+        dispatch(addSort({title: '', titleBd: '', sort: ''}));
+    };
 
     return (
         <header className={styles.header}>
@@ -20,7 +29,7 @@ const Header: React.FC = () => {
             <Favorite openFavorite={openFavorite} setOpenFavorite={setOpenFavorite}/>
             <Cart openCart={openCart} setOpenCart={setOpenCart}/>
             
-            <Link to='/' className={styles.headerName}>
+            <Link onClick={handleDefault} to='/' className={styles.headerName}>
                 <img src='/images/footshop.jpg' className={styles.headerNameMenuLogo}/>
                 <div className={styles.headerNameMenuTitle}>SneakersShop</div>
             </Link>
