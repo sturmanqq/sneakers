@@ -8,8 +8,8 @@ import { IError, IFilters, IProduct, IProductList, Status } from '../types/types
         async function (params, {rejectWithValue}) {
 
             try {
-                const {searchValue, pageValue, category, sortBy, order} = params;
-                const responce = await axios.get(`http://localhost:3001/products?_page=${pageValue}&_limit=8&q=${searchValue}${category}&_sort=${sortBy}&_order=${order}`);
+                const {searchValue, category, sortBy, order} = params;
+                const responce = await axios.get(`http://localhost:3001/products?_q=${searchValue}${category}&_sort=${sortBy}&_order=${order}`);
                 return responce.data;
             } catch (error) {
                 if(axios.isAxiosError(error)) {

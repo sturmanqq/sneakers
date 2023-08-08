@@ -26,8 +26,8 @@ export interface ISort {
 };
 
 export interface IFilter{
+    pageCount:number,
     searchValue: string,
-    pageValue: number,
     categoryValue: number,
     sortValue: ISort,
 };
@@ -39,7 +39,6 @@ export interface IFavorites {
 
 export interface IFilters {
     searchValue: string,
-    pageValue: number,
     category: string,
     sortBy: string,
     order: string,
